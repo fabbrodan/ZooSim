@@ -8,7 +8,7 @@ namespace ZooSim.Interfaces
     {
         void Eat();
         void Sleep();
-        void Update();
+        void Update(DateTime gameTime);
         string GetState();
     }
 }

@@ -20,10 +20,14 @@ namespace ZooSim.Animals
             EnergyLevel = 10;
         }
 
-        public override void Update()
+        public override void Update(DateTime gameTime)
         {
-            EnergyLevel--;
-            HungerLevel++;
+            if (gameTime > nextUpdateTime)
+            {
+                EnergyLevel--;
+                HungerLevel++;
+                nextUpdateTime = gameTime.AddMinutes(1);
+            }
         }
 
         public override string GetState()

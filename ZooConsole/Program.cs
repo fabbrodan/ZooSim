@@ -9,7 +9,7 @@ namespace ZooConsole
     {
         static async Task Main(string[] args)
         {
-            var gui = new ConsoleGUI(20, 100)
+            var gui = new ConsoleGUI(35, 149)
             {
                 TargetUpdateTime = 100
             };
