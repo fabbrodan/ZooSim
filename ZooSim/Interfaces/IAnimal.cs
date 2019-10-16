@@ -10,5 +10,6 @@ namespace ZooSim.Interfaces
         void Sleep();
         void Update(DateTime gameTime);
         string GetState();
+        string GetName();
     }
 }

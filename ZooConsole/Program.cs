@@ -14,7 +14,7 @@ namespace ZooConsole
                 TargetUpdateTime = 100
             };
 
-            var sim = new MySimulation();
+            var sim = new MySimulation(gui.Input);
             await gui.Start(sim);
         }
     }

@@ -11,7 +11,8 @@ namespace ZooSim.Animals
         protected int Age { get; set; }
         protected int HungerLevel { get; set; }
         protected int EnergyLevel { get; set; }
-        protected DateTime nextUpdateTime = DateTime.Now.AddMinutes(1);
+        protected DateTime nextUpdateTime;
+        protected DateTime nextAgingTime = DateTime.Now.AddHours(24);
         protected Animal(string Name, int Age)
         {
             HungerLevel = 0;
@@ -22,7 +23,20 @@ namespace ZooSim.Animals
 
         public abstract void Sleep();
 
+        public void UpdateAge(DateTime gameTime)
+        {
+            if (gameTime >= nextAgingTime)
+            {
+                nextAgingTime = nextAgingTime.AddHours(24);
+                Age++;
+            }
+        }
         public abstract void Update(DateTime gameTime);
         public abstract string GetState();
+
+        public string GetName()
+        {
+            return Name;
+        }
     }
 }

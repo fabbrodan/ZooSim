@@ -8,48 +8,66 @@ namespace ZooSim
 {
     public class MySimulation : Simulation
     {
-        private RollingDisplay log = new RollingDisplay(0, 0, -1, 12);
-        private BorderedDisplay clockDisplay = new BorderedDisplay(0, 11, 30, 3);
-        private BorderedDisplay optionsDisplay = new BorderedDisplay(31, 11, 20, 3);
-        public override List<BaseDisplay> Displays => new List<BaseDisplay>() {log, clockDisplay, optionsDisplay, Input.CreateDisplay(0, -3, -1, 3)};
+        private RollingDisplay _log = new RollingDisplay(0, 0, -1, 12);
+        private BorderedDisplay _clockDisplay = new BorderedDisplay(0, 11, 30, 3);
+        private BorderedDisplay _optionsDisplay = new BorderedDisplay(31, 11, 20, 3);
+        private Input _input;
+        private InputParser _parser;
+        public override List<BaseDisplay> Displays => new List<BaseDisplay>() { _log, _clockDisplay, _optionsDisplay, _input.CreateDisplay(0, -3, -1) };
 
-        private List<string> _commandList = new List<string>();
+        private List<string> _commandList = new List<string>()
+        {
+            "Add Elephant",
+            "Add Monkey",
+            "AdvanceTime",
+            "Kill",
+            "Feed"
+        };
 
         private List<IAnimal> _animals = new List<IAnimal>();
-        private DateTime gameTime = DateTime.Now;
-        public MySimulation()
+        private DateTime _gameTime = DateTime.Now;
+        public MySimulation(Input input)
         {
-            log.Log("Welcome to the Zoo Simulation!");
-            log.Log("In game time is passed on one hour at every command you enter and real time otherwise.");
+            _input = input;
+            _input.SetAutoCompleteWordList(_commandList);
+            _parser = new InputParser(ref _animals);
+            _log.Log("Welcome to the Zoo Simulation!");
         }
         public override void PassTime(int deltaTime)
         {
-            Input.SetAutoCompleteWordList(_commandList);
-            gameTime = gameTime.AddMilliseconds(deltaTime);
-            while (Input.HasInput)
+            _gameTime = _gameTime.AddMilliseconds(deltaTime);
+            while (_input.HasInput)
             {
-                string input = Input.Consume();
+                string input = _input.Consume();
                 if (input != "")
                 {
-                    if (input.StartsWith("Add"))
+                    if (input == "AdvanceTime")
                     {
-                        _animals.Add(InputParser.ParseActionInput(input));
+                        _gameTime = _gameTime.AddHours(1);
                     }
-                    gameTime = gameTime.AddHours(1);
+                    else
+                    {
+                        _parser.ParseInput(input);
+                    }
                 }
+                else
+                {
+                    _log.Log("Not a valid input");
+                }
+
             }
             foreach (IAnimal animal in _animals)
             {
                 string animalStatePriorToUpdate = animal.GetState();
-                animal.Update(gameTime);
+                animal.Update(_gameTime);
                 string animalStateAfterUpdate = animal.GetState();
 
                 if (animalStatePriorToUpdate != animalStateAfterUpdate)
                 {
-                    log.Log(animal.GetState());
+                    _log.Log(animal.GetState());
                 }
             }
-            clockDisplay.Value = gameTime.ToString("yyyy-MM-dd HH:mm:ss");
+            _clockDisplay.Value = _gameTime.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 }

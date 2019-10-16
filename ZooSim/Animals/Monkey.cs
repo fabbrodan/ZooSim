@@ -9,6 +9,7 @@ namespace ZooSim.Animals
         public Monkey(string Name, int Age) : base(Name, Age)
         {
             EnergyLevel = 25;
+            nextUpdateTime = DateTime.Now.AddMinutes(2);
         }
         public override void Eat()
         {
@@ -27,6 +28,7 @@ namespace ZooSim.Animals
 
         public override void Update(DateTime gameTime)
         {
+            UpdateAge(gameTime);
             if (gameTime > nextUpdateTime)
             {
                 HungerLevel++;

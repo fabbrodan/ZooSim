@@ -8,57 +8,49 @@ using ZooSim.Factories;
 
 namespace ZooSim
 {
-    public static class InputParser
+    public class InputParser
     {
-        private static AnimalFactory _animalFactory = null;
-        private static string CommandString = String.Empty;
-        private static string[] _commands = new string[]
+        public InputParser(ref List<IAnimal> animalList)
         {
-            "Feed",
-            "Kill",
-            "Add"
-        };
+            _animalList = animalList;
 
-        private static string[] _animals = new string[]
+        }
+
+        private List<IAnimal> _animalList;
+
+        private  AnimalFactory _animalFactory = null;
+
+        public void ParseInput(string input)
         {
-            "Elephant",
-            "Monkey"
-        };
+            string[] inputAsArray = input.Split(" ");
+            string command = inputAsArray[0];
 
-        public static IAnimal ParseActionInput(string input)
-        {
-            string name = "";
-            int age = 0;
-
-            if (_commands.Contains(input.Split(" ")[0]))
+            if (command == "Add")
             {
-                CommandString += input.Split(" ")[0];
-            }
+                string Name = inputAsArray[2];
+                int Age = Int32.Parse(inputAsArray[3]);
+                string animalAsString = inputAsArray[1];
+                if (animalAsString == "Elephant")
+                {
+                    _animalFactory = new ElephantFactory(Name, Age);
+                    Elephant elephant = (Elephant)_animalFactory.GetAnimal();
+                    _animalList.Add(elephant);
+                    _animalFactory = null;
+                }
 
-            if (_animals.Contains(input.Split(" ")[1]))
+                if (animalAsString == "Monkey")
+                {
+                    _animalFactory = new MonkeyFactory(Name, Age);
+                    Monkey monkey = (Monkey)_animalFactory.GetAnimal();
+                    _animalList.Add(monkey);
+                    _animalFactory = null;
+                }
+            }
+            else if (command == "Kill")
             {
-                CommandString += input.Split(" ")[1];
+                string Name = inputAsArray[1];
+                _animalList.Remove(_animalList.First(a => a.GetName() == Name));
             }
-
-            if (!String.IsNullOrEmpty(input.Split(" ")[2]))
-            {
-                name = input.Split(" ")[2];
-            }
-
-            if (!String.IsNullOrEmpty(input.Split(" ")[3]))
-            {
-                age = Int32.Parse(input.Split(" ")[3]);
-            }
-
-            if (CommandString == "AddElephant")
-            {
-                _animalFactory = new ElephantFactory(name, age);
-                Elephant elephant = (Elephant)_animalFactory.GetAnimal();
-                _animalFactory = null;
-            }
-
-
-            return null;
         }
     }
 }
