@@ -10,7 +10,7 @@ namespace ZooSim
     {
         private RollingDisplay _log = new RollingDisplay(0, 0, -1, 12);
         private BorderedDisplay _clockDisplay = new BorderedDisplay(0, 11, 30, 3);
-        private BorderedDisplay _optionsDisplay = new BorderedDisplay(31, 11, 20, 3);
+        private BorderedDisplay _optionsDisplay = new BorderedDisplay(Console.WindowWidth - 20, 11, 20, 5);
         private Input _input;
         private InputParser _parser;
         public override List<BaseDisplay> Displays => new List<BaseDisplay>() { _log, _clockDisplay, _optionsDisplay, _input.CreateDisplay(0, -3, -1) };
@@ -21,7 +21,8 @@ namespace ZooSim
             "Add Monkey",
             "AdvanceTime",
             "Kill",
-            "Feed"
+            "Feed",
+            "Status"
         };
 
         private List<IAnimal> _animals = new List<IAnimal>();
@@ -30,7 +31,8 @@ namespace ZooSim
         {
             _input = input;
             _input.SetAutoCompleteWordList(_commandList);
-            _parser = new InputParser(ref _animals);
+            _parser = new InputParser(ref _animals, this);
+            _optionsDisplay.Value = "Elephant" + Environment.NewLine +  "Monkey" + Environment.NewLine + "Penguin";
             _log.Log("Welcome to the Zoo Simulation!");
         }
         public override void PassTime(int deltaTime)
@@ -39,6 +41,7 @@ namespace ZooSim
             while (_input.HasInput)
             {
                 string input = _input.Consume();
+                _log.Log(input);
                 if (input != "")
                 {
                     if (input == "AdvanceTime")

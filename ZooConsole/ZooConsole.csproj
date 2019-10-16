@@ -6,10 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ConsoleSimulationEngine2000" Version="2.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\ConsoleSimulationEngine2000\ConsoleSimulationEngine2000.csproj" />
     <ProjectReference Include="..\ZooSim\ZooSim.csproj" />
   </ItemGroup>
 

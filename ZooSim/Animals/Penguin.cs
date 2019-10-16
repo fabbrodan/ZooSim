@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ZooSim.Animals
+{
+    public class Penguin : Animal
+    {
+        public Penguin(string Name, int Age) : base(Name, Age)
+        {
+            HungerLevel = 0;
+            EnergyLevel = 15;
+            nextUpdateTime = DateTime.Now.AddMinutes(5);
+        }
+        public override void Eat()
+        {
+            HungerLevel = 0;
+        }
+
+        public override string GetState()
+        {
+            return "Penguin " + Name + " is " + Age + " years old. It is currently " + HungerLevel + " hungry and " + EnergyLevel + " energetic.";
+        }
+
+        public override void Sleep()
+        {
+            EnergyLevel = 15;
+        }
+
+        public override void Update(DateTime gameTime)
+        {
+            UpdateAge(gameTime);
+            if (gameTime > nextUpdateTime)
+            {
+                HungerLevel++;
+                EnergyLevel--;
+                nextUpdateTime = gameTime.AddMinutes(5);
+            }
+        }
+    }
+}
