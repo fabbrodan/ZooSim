@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using System.Reflection;
 using ZooSim.Animals;
 using ZooSim.Interfaces;
+using ZooSim.Factories;
 
 namespace ZooSim
 {
     public static class InputParser
     {
+        private static AnimalFactory _animalFactory = null;
         private static string CommandString = String.Empty;
         private static string[] _commands = new string[]
         {
@@ -51,16 +52,13 @@ namespace ZooSim
 
             if (CommandString == "AddElephant")
             {
-                return CreateNewElephant(name, age);
+                _animalFactory = new ElephantFactory(name, age);
+                Elephant elephant = (Elephant)_animalFactory.GetAnimal();
+                _animalFactory = null;
             }
-            return null;
-        }
 
-        private static Elephant CreateNewElephant(string name, int age)
-        {
-            Type Elephant = Type.GetType("ZooSim.Animals.Elephant");
-            CommandString = String.Empty;
-            return (Elephant)Activator.CreateInstance(Elephant, new object[] { name, age });
+
+            return null;
         }
     }
 }
