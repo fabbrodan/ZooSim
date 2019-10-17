@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZooSim.Interfaces;
+using System.Threading.Tasks;
 
 namespace ZooSim.Animals
 {
@@ -11,6 +12,7 @@ namespace ZooSim.Animals
         protected int Age { get; set; }
         protected int HungerLevel { get; set; }
         protected int EnergyLevel { get; set; }
+        public decimal Price { get; set; }
         protected DateTime nextUpdateTime;
         protected DateTime nextAgingTime = DateTime.Now.AddHours(24);
         protected Animal(string Name, int Age)
@@ -20,18 +22,19 @@ namespace ZooSim.Animals
             this.Age = Age;
         }
         public abstract void Eat();
-
         public abstract void Sleep();
-
-        public void UpdateAge(DateTime gameTime)
+        public async Task UpdateAge(DateTime gameTime)
         {
-            if (gameTime >= nextAgingTime)
+            await Task.Run(() =>
             {
-                nextAgingTime = nextAgingTime.AddHours(24);
-                Age++;
-            }
+                if (gameTime >= nextAgingTime)
+                {
+                    nextAgingTime = nextAgingTime.AddHours(24);
+                    Age++;
+                }
+            });
         }
-        public abstract void Update(DateTime gameTime);
+        public abstract Task Update(DateTime gameTime);
         public abstract string GetState();
 
         public string GetName()

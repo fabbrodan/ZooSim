@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using ZooSim.Animals;
 using ZooSim.Interfaces;
 using ZooSim.Factories;
 using ConsoleSimulationEngine2000;
 
-namespace ZooSim
+namespace ZooSim.Utils
 {
     public class InputParser
     {
@@ -19,6 +18,8 @@ namespace ZooSim
         }
         private RollingDisplay logDisplay;
         private List<IAnimal> _animalList;
+
+        // TODO: Implement AnimalManager and refactor
 
         private  AnimalFactory _animalFactory = null;
 
@@ -43,7 +44,7 @@ namespace ZooSim
                 string Name = String.Empty;
                 int Age = 0;
                 string animalAsString = String.Empty;
-                Animal animalToAdd = null;
+                
                 try
                 {
                     Name = inputAsArray[2];
@@ -57,37 +58,15 @@ namespace ZooSim
                     return;
                 }
 
-                if (animalAsString == "Elephant")
-                {
-                    _animalFactory = new ElephantFactory(Name, Age);
-                    animalToAdd = (Elephant)_animalFactory.GetAnimal();
-                    _animalFactory = null;
-                }
-
-                if (animalAsString == "Monkey")
-                {
-                    _animalFactory = new MonkeyFactory(Name, Age);
-                    animalToAdd = (Monkey)_animalFactory.GetAnimal();
-                    _animalFactory = null;
-                }
-
-                if (animalAsString == "Penguin")
-                {
-                    _animalFactory = new PenguinFactory(Name, Age);
-                    animalToAdd = (Penguin)_animalFactory.GetAnimal();
-                    _animalFactory = null;
-                }
-
-                _animalList.Add(animalToAdd);
-                logDisplay.Log(animalToAdd.GetState());
+                AddAnimal(animalAsString, Name, Age);
             }
             else if (command != "Add")
             {
                 if (command == "Kill")
                 {
                     string Name = inputAsArray[1];
-                    logDisplay.Log(Name + " is dead");
                     _animalList.Remove(_animalList.First(a => a.GetName() == Name));
+                    logDisplay.Log(Name + " is dead");
                 }
                 else if (command == "Feed")
                 {
@@ -125,6 +104,35 @@ namespace ZooSim
             {
                 logDisplay.Log("Not a command");
             }
+        }
+
+        private void AddAnimal(string animalAsString, string name, int age)
+        {
+            IAnimal animalToAdd = null;
+
+            if (animalAsString == "Elephant")
+            {
+                _animalFactory = new ElephantFactory(name, age);
+                animalToAdd = (Elephant)_animalFactory.GetAnimal();
+                _animalFactory = null;
+            }
+
+            if (animalAsString == "Monkey")
+            {
+                _animalFactory = new MonkeyFactory(name, age);
+                animalToAdd = (Monkey)_animalFactory.GetAnimal();
+                _animalFactory = null;
+            }
+
+            if (animalAsString == "Penguin")
+            {
+                _animalFactory = new PenguinFactory(name, age);
+                animalToAdd = (Penguin)_animalFactory.GetAnimal();
+                _animalFactory = null;
+            }
+
+            _animalList.Add(animalToAdd);
+            logDisplay.Log(animalToAdd.GetState());
         }
     }
 }

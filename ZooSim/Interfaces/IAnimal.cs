@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ZooSim.Interfaces
 {
@@ -8,7 +9,7 @@ namespace ZooSim.Interfaces
     {
         void Eat();
         void Sleep();
-        void Update(DateTime gameTime);
+        Task Update(DateTime gameTime);
         string GetState();
         string GetName();
     }

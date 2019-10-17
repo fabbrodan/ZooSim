@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ZooSim.Animals
 {
@@ -10,6 +11,7 @@ namespace ZooSim.Animals
         {
             EnergyLevel = 15;
             nextUpdateTime = DateTime.Now.AddMinutes(1);
+            Price = 250.00m;
         }
         public override void Eat()
         {
@@ -21,15 +23,18 @@ namespace ZooSim.Animals
             EnergyLevel = 10;
         }
 
-        public override void Update(DateTime gameTime)
+        public override async Task Update(DateTime gameTime)
         {
-            UpdateAge(gameTime);
-            if (gameTime > nextUpdateTime)
+            await Task.Run(async () =>
             {
-                EnergyLevel--;
-                HungerLevel++;
-                nextUpdateTime = gameTime.AddMinutes(1);
-            }
+                await UpdateAge(gameTime);
+                if (gameTime > nextUpdateTime)
+                {
+                    EnergyLevel--;
+                    HungerLevel++;
+                    nextUpdateTime = gameTime.AddMinutes(1);
+                }
+            });
         }
 
         public override string GetState()
