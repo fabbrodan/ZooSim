@@ -81,38 +81,43 @@ namespace ZooSim
                 _animalList.Add(animalToAdd);
                 logDisplay.Log(animalToAdd.GetState());
             }
-            else if (command == "Kill")
+            else if (command != "Add")
             {
-                string Name = inputAsArray[1];
-                logDisplay.Log(Name + " is dead");
-                _animalList.Remove(_animalList.First(a => a.GetName() == Name));
-            }
-            else if (command == "Feed")
-            {
-                string Name = inputAsArray[1];
-
-            }
-            else if (command == "Status")
-            {
-                string Name = inputAsArray[1];
-
-                if (Name == "all")
+                if (command == "Kill")
                 {
-                    foreach (IAnimal animal in _animalList)
-                    {
-                        logDisplay.Log(animal.GetState());
-                    }
+                    string Name = inputAsArray[1];
+                    logDisplay.Log(Name + " is dead");
+                    _animalList.Remove(_animalList.First(a => a.GetName() == Name));
                 }
-                else
+                else if (command == "Feed")
                 {
-                    try
+                    string Name = inputAsArray[1];
+                    IAnimal animalToFeed = _animalList.First(a => a.GetName() == Name);
+                    animalToFeed.Eat();
+                    logDisplay.Log(animalToFeed.GetState());
+                }
+                else if (command == "Status")
+                {
+                    string Name = inputAsArray[1];
+
+                    if (Name == "all")
                     {
-                        var animal = _animalList.First(a => a.GetName() == Name);
-                        logDisplay.Log(animal.GetState());
+                        foreach (IAnimal animal in _animalList)
+                        {
+                            logDisplay.Log(animal.GetState());
+                        }
                     }
-                    catch (InvalidOperationException)
+                    else
                     {
-                        logDisplay.Log("There is no animal with the name " + Name);
+                        try
+                        {
+                            var animal = _animalList.First(a => a.GetName() == Name);
+                            logDisplay.Log(animal.GetState());
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            logDisplay.Log("There is no animal with the name " + Name);
+                        }
                     }
                 }
             }

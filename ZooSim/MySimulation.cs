@@ -11,7 +11,7 @@ namespace ZooSim
         private RollingDisplay _log = new RollingDisplay(0, 0, -1, 12);
         private BorderedDisplay _clockDisplay = new BorderedDisplay(0, 11, 30, 3);
         private BorderedDisplay _optionsDisplay = new BorderedDisplay(Console.WindowWidth - 20, 11, 20, 5);
-        private Input _input;
+        private TextInput _input;
         private InputParser _parser;
         public override List<BaseDisplay> Displays => new List<BaseDisplay>() { _log, _clockDisplay, _optionsDisplay, _input.CreateDisplay(0, -3, -1) };
 
@@ -27,14 +27,16 @@ namespace ZooSim
 
         private List<IAnimal> _animals = new List<IAnimal>();
         private DateTime _gameTime = DateTime.Now;
-        public MySimulation(Input input)
+
+        public MySimulation(IInput<string> input)
         {
-            _input = input;
+            _input = (TextInput)input;
             _input.SetAutoCompleteWordList(_commandList);
             _parser = new InputParser(ref _animals, this);
             _optionsDisplay.Value = "Elephant" + Environment.NewLine +  "Monkey" + Environment.NewLine + "Penguin";
             _log.Log("Welcome to the Zoo Simulation!");
         }
+
         public override void PassTime(int deltaTime)
         {
             _gameTime = _gameTime.AddMilliseconds(deltaTime);

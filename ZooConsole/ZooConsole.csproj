@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleSimulationEngine2000\ConsoleSimulationEngine2000.csproj" />
     <ProjectReference Include="..\ZooSim\ZooSim.csproj" />
   </ItemGroup>
 

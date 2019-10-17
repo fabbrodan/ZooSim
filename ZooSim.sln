@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZooSim", "ZooSim\ZooSim.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZooConsole", "ZooConsole\ZooConsole.csproj", "{BEA7126E-DCF4-484D-9C66-3F337F80A709}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleSimulationEngine2000", "ConsoleSimulationEngine2000\ConsoleSimulationEngine2000.csproj", "{E4E9B154-B948-4DBC-8A91-01899EF3DF9D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{BEA7126E-DCF4-484D-9C66-3F337F80A709}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEA7126E-DCF4-484D-9C66-3F337F80A709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEA7126E-DCF4-484D-9C66-3F337F80A709}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4E9B154-B948-4DBC-8A91-01899EF3DF9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4E9B154-B948-4DBC-8A91-01899EF3DF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4E9B154-B948-4DBC-8A91-01899EF3DF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4E9B154-B948-4DBC-8A91-01899EF3DF9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
