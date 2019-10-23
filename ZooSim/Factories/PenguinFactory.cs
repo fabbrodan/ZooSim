@@ -2,22 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using ZooSim.Animals;
+using ZooSim.Interfaces;
 
 namespace ZooSim.Factories
 {
-    class PenguinFactory : AnimalFactory
+    public class PenguinFactory : IAnimalFactory<Penguin>
     {
-        private string _name;
-        private int _age;
-
-        public PenguinFactory(string Name, int Age)
+        public Penguin GetAnimal(string name, int age)
         {
-            _name = Name;
-            _age = Age;
-        }
-        public override Animal GetAnimal()
-        {
-            return new Penguin(_name, _age);
+            return new Penguin(name, age);
         }
     }
 }

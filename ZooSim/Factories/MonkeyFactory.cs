@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZooSim.Interfaces;
 using ZooSim.Animals;
 
 namespace ZooSim.Factories
 {
-    class MonkeyFactory : AnimalFactory
+    public class MonkeyFactory : IAnimalFactory<Monkey>
     {
-        private string _name;
-        private int _age;
-
-        public MonkeyFactory(string Name, int Age)
+        public Monkey GetAnimal(string name, int age)
         {
-            _name = Name;
-            _age = Age;
-        }
-
-        public override Animal GetAnimal()
-        {
-            return new Monkey(_name, _age);
+            return new Monkey(name, age);
         }
     }
 }

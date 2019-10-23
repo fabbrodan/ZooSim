@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ZooSim.Animals
 {
-    class Elephant : Animal
+    public class Elephant : Animal
     {
         public Elephant(string Name, int Age) : base(Name, Age)
         {
@@ -23,18 +23,15 @@ namespace ZooSim.Animals
             EnergyLevel = 10;
         }
 
-        public override async Task Update(DateTime gameTime)
+        public override void Update(DateTime gameTime)
         {
-            await Task.Run(async () =>
+            UpdateAge(gameTime);
+            if (gameTime > nextUpdateTime)
             {
-                await UpdateAge(gameTime);
-                if (gameTime > nextUpdateTime)
-                {
-                    EnergyLevel--;
-                    HungerLevel++;
-                    nextUpdateTime = gameTime.AddMinutes(1);
-                }
-            });
+                EnergyLevel--;
+                HungerLevel++;
+                nextUpdateTime = gameTime.AddMinutes(1);
+            }
         }
 
         public override string GetState()

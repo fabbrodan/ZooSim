@@ -2,22 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using ZooSim.Animals;
+using ZooSim.Interfaces;
+
 
 namespace ZooSim.Factories
 {
-    class ElephantFactory : AnimalFactory
+    public class ElephantFactory : IAnimalFactory<Elephant>
     {
-        private string _name;
-        private int _age;
-
-        public ElephantFactory(string Name, int Age)
+        public Elephant GetAnimal(string name, int age)
         {
-            _name = Name;
-            _age = Age;
-        } 
-        public override Animal GetAnimal()
-        {
-            return new Elephant(_name, _age);
+            return new Elephant(name, age);
         }
     }
 }

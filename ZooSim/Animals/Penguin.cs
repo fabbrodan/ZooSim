@@ -29,18 +29,15 @@ namespace ZooSim.Animals
             EnergyLevel = 15;
         }
 
-        public override async Task Update(DateTime gameTime)
+        public override void Update(DateTime gameTime)
         {
-            await Task.Run(async () =>
+            UpdateAge(gameTime);
+            if (gameTime > nextUpdateTime)
             {
-                await UpdateAge(gameTime);
-                if (gameTime > nextUpdateTime)
-                {
-                    HungerLevel++;
-                    EnergyLevel--;
-                    nextUpdateTime = gameTime.AddMinutes(5);
-                }
-            });
+                HungerLevel++;
+                EnergyLevel--;
+                nextUpdateTime = gameTime.AddMinutes(5);
+            }
         }
     }
 }
