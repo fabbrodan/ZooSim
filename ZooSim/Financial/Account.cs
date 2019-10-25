@@ -1,4 +1,5 @@
 ﻿using ZooSim.Interfaces;
+using System;
 
 namespace ZooSim.Financial
 {
@@ -6,6 +7,8 @@ namespace ZooSim.Financial
     {
         public decimal Balance;
         public decimal Loan;
+        private static readonly decimal _interest = 0.15m;
+        private DateTime _nextInterestTime = DateTime.Now.AddMinutes(5);
 
         public Account(decimal balance)
         {
@@ -41,7 +44,16 @@ namespace ZooSim.Financial
         {
             if (Balance - amount > 0)
             {
-                Balance -= 0;
+                Balance -= amount;
+            }
+        }
+
+        public void WithdrawInterest(DateTime gameTime)
+        {
+            if (gameTime >= _nextInterestTime)
+            {
+                _nextInterestTime = _nextInterestTime.AddMinutes(5);
+                Balance -= Loan * _interest;
             }
         }
     }

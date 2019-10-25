@@ -1,7 +1,6 @@
 ﻿using ZooConsole.Interfaces;
 using System.Collections.Generic;
 using ZooSim.Animals;
-using ZooSim.Factories;
 using ZooConsole.Commands;
 using System.Text.RegularExpressions;
 using ZooSim;
@@ -24,11 +23,15 @@ namespace ZooConsole.Utils
             input.Trim();
             string[] _inputAsArray = input.Split(" ");
             string[] paramArr = new string[2];
-            if (_inputAsArray.Length < 2)
+            if (_inputAsArray.Length < 1)
             {
                 return new GeneralWrite(_logDisplayWriter, "\"" + input + "\"" + " is not a recognized command");
             }
-            else if (_inputAsArray.Length > 2)
+            else  if (_inputAsArray.Length == 3)
+            {
+                paramArr[1] = _inputAsArray[2];
+            }
+            else if (_inputAsArray.Length == 4)
             {
                 paramArr[0] = _inputAsArray[2];
                 paramArr[1] = _inputAsArray[3];
@@ -46,8 +49,8 @@ namespace ZooConsole.Utils
                 { "Kill", new Kill(_zoo, paramArr) },
                 { "Status", new WriteStatus(_zoo, _logDisplayWriter, paramArr) },
                 { "Loan", new Loan(_zoo, paramArr) },
-                { "Add Funds", new AddFunds(_zoo, paramArr) },
-                { "Pay Loan", new PayLoan(_zoo, paramArr) }
+                { "Pay Loan", new PayLoan(_zoo, paramArr) },
+                { "Sleep", new Sleep(_zoo, paramArr) }
             };
 
             foreach (KeyValuePair<string, ICommand> kvp in _commandDict)

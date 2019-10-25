@@ -49,8 +49,12 @@ namespace ZooConsole
             "Add Penguin",
             "Kill",
             "Feed",
-            "Status"
+            "Status",
+            "Loan",
+            "Pay Loan",
+            "Sleep",
         };
+
         private static List<IAnimal> _availableAnimals = new List<IAnimal>()
         {
             new Elephant("dummy", 0),

@@ -38,5 +38,10 @@ namespace ZooSim.Animals
         {
             return Name;
         }
+
+        public decimal GetPrice()
+        {
+            return Price;
+        }
     }
 }

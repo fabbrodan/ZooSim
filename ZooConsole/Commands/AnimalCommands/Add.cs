@@ -12,22 +12,22 @@ namespace ZooConsole.Commands
     {
         private string _name;
         private int _age;
-        //private IAnimalFactory<T> _factory;
         private IZooAnimals _animals;
+        private IZooAccount _account;
 
-        public Add(IZooAnimals animals, params string[] nameAndAge)
+        public Add(ZooSim.Zoo zoo, params string[] nameAndAge)
         {
             _name = nameAndAge[0];
             _ = Int32.TryParse(nameAndAge[1], out _age);
-            //_factory = factory;
-            _animals = animals;
+            _animals = zoo.Animals;
+            _account = zoo.Account;
         }
 
         public void Execute()
         {
             IAnimal animal = (T)Activator.CreateInstance(typeof(T), new object[] { _name, _age });
-            //IAnimal animal = _factory.GetAnimal(_name, _age);
             _animals.Add(animal);
+            _account.RemoveFunds(animal.GetPrice());
         }
     }
 }
