@@ -23,9 +23,9 @@ namespace ZooConsole.Utils
             input.Trim();
             string[] _inputAsArray = input.Split(" ");
             string[] paramArr = new string[2];
-            if (_inputAsArray.Length < 1)
+            if (_inputAsArray.Length == 2)
             {
-                return new GeneralWrite(_logDisplayWriter, "\"" + input + "\"" + " is not a recognized command");
+                paramArr = _inputAsArray;
             }
             else  if (_inputAsArray.Length == 3)
             {
@@ -36,10 +36,12 @@ namespace ZooConsole.Utils
                 paramArr[0] = _inputAsArray[2];
                 paramArr[1] = _inputAsArray[3];
             }
-            else 
+            else
             {
-                paramArr = _inputAsArray;
+                return new GeneralWrite(_logDisplayWriter, "\"" + input + "\"" + " is not a valid/recognized command");
             }
+
+
             _commandDict = new Dictionary<string, ICommand>()
             {
                 { "Add Elephant", new Add<Elephant>(_zoo, paramArr) },
@@ -47,7 +49,6 @@ namespace ZooConsole.Utils
                 { "Add Penguin", new Add<Penguin>(_zoo, paramArr) },
                 { "Feed", new Feed(_zoo, paramArr) },
                 { "Kill", new Kill(_zoo, paramArr) },
-                { "Status", new WriteStatus(_zoo, _logDisplayWriter, paramArr) },
                 { "Loan", new Loan(_zoo, paramArr) },
                 { "Pay Loan", new PayLoan(_zoo, paramArr) },
                 { "Sleep", new Sleep(_zoo, paramArr) }

@@ -23,7 +23,7 @@ namespace ZooConsole
         private BorderedDisplay _moneyDisplay = new BorderedDisplay(Console.WindowWidth - 50, 11, 25, 3);
         private BorderedDisplay _loanDisplay = new BorderedDisplay(Console.WindowWidth - 50, 14, 25, 3);
         private BorderedDisplay _commandDisplay = new BorderedDisplay(0, 11, Console.WindowWidth - 80, 12);
-        private BorderedDisplay _versionDisplay = new BorderedDisplay(Console.WindowWidth - 25, Console.WindowHeight - 3, 25, 3);
+        private BorderedDisplay _versionDisplay = new BorderedDisplay(Console.WindowWidth - 30, Console.WindowHeight - 3, 30, 3);
 
         // Display Writers
         private BorderedDisplayWriter _clockWriter;
@@ -52,10 +52,19 @@ namespace ZooConsole
             "Add Penguin",
             "Kill",
             "Feed",
-            "Status",
             "Loan",
             "Pay Loan",
             "Sleep"
+        };
+
+        private List<string> _displayCommands = new List<string>()
+        {
+            "Add",
+            "Kill",
+            "Feed",
+            "Sleep",
+            "Loan",
+            "Pay Loan"
         };
 
         public override List<BaseDisplay> Displays => new List<BaseDisplay>()
@@ -68,7 +77,7 @@ namespace ZooConsole
             _animalListDisplay,
             _commandDisplay,
             _versionDisplay,
-            _input.CreateDisplay(0, -3, Console.WindowWidth - 25)
+            _input.CreateDisplay(0, -3, Console.WindowWidth - 30)
         };
 
         #region Constructor
@@ -159,7 +168,7 @@ namespace ZooConsole
         {
             StringBuilder sb = new StringBuilder("Commands:");
             sb.AppendLine();
-            foreach (string s in _commandList)
+            foreach (string s in _displayCommands)
             {
                 sb.AppendLine(s);
             }

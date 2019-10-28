@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZooSim", "ZooSim\ZooSim.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZooConsole", "ZooConsole\ZooConsole.csproj", "{BEA7126E-DCF4-484D-9C66-3F337F80A709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooTest", "ZooTest\ZooTest.csproj", "{B0C3A868-697B-4347-8BA0-64CEF72301AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZooTest", "ZooTest\ZooTest.csproj", "{B0C3A868-697B-4347-8BA0-64CEF72301AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
