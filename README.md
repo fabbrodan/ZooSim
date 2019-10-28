@@ -14,7 +14,9 @@ The model contains the following entities:
 	* Account
 
 **Version: Alpha 0.0.1.2**
-To-Do List
+
+To-Do List:
+
 - [X] Interest of Loans
 - [ ] Animals generating money
 - [ ] Death by age
@@ -30,14 +32,20 @@ Here we are utiizing the Command Design Pattern to agnostically handle user inpu
 Examples of command usage:
 
 "Add Elephant Dumbo 5"
+
 "Feed Dumbo"
+
 "Sleep Dumbo"
+
 "Kill Dumbo"
+
 "Loan 500"
+
 "Pay Loan 250"
 
 
 **Version: Alpha 0.0.1.2**
+
 Only supports single-worded names for animals
 
 
