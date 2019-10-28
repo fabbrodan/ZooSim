@@ -42,7 +42,7 @@ namespace ZooSim.Financial
 
         public void RemoveFunds(decimal amount)
         {
-            if (Balance - amount > 0)
+            if (Balance - amount >= 0)
             {
                 Balance -= amount;
             }

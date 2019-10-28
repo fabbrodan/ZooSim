@@ -15,7 +15,7 @@ namespace ZooSim
         public Zoo()
         {
             Animals = new ZooAnimals();
-            Account = new Account(5000.00m);
+            Account = new Account(1000.00m);
         }
 
         public void Add(IAnimal animal)
@@ -61,6 +61,11 @@ namespace ZooSim
         public void RemoveFunds(decimal amount)
         {
             Account.RemoveFunds(amount);
+        }
+
+        public void WithdrawInterest(DateTime gameTime)
+        {
+            Account.WithdrawInterest(gameTime);
         }
     }
 }

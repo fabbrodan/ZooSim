@@ -6,12 +6,12 @@ using ConsoleSimulationEngine2000;
 
 namespace ZooConsole.Objects
 {
-    class RollingDisplayLog : IDisplayWriter
+    class RollingDisplayWriter : IDisplayWriter
     {
         private readonly RollingDisplay _display;
         private readonly int _height;
         private readonly int _width;
-        public RollingDisplayLog(RollingDisplay display)
+        public RollingDisplayWriter(RollingDisplay display)
         {
             _display = display;
             _height = display.Height;

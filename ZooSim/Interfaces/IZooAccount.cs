@@ -12,5 +12,7 @@ namespace ZooSim.Interfaces
         void PayLoan(decimal amount);
         decimal GetBalance();
         decimal GetLoan();
+
+        void WithdrawInterest(DateTime gameTime);
     }
 }

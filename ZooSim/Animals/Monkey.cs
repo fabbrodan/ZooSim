@@ -25,7 +25,7 @@ namespace ZooSim.Animals
 
         public override void Sleep()
         {
-            EnergyLevel = 10;
+            EnergyLevel = 25;
         }
 
         public override void Update(DateTime gameTime)
@@ -35,7 +35,7 @@ namespace ZooSim.Animals
             {
                 HungerLevel++;
                 EnergyLevel--;
-                nextUpdateTime = gameTime.AddMinutes(4);
+                nextUpdateTime = gameTime.AddMinutes(2);
             }
         }
     }

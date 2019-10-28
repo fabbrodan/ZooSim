@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Reflection;
-using System.Collections.Generic;
 using ZooConsole.Interfaces;
 using ZooSim.Interfaces;
-using ZooConsole.Utils;
-using ZooSim.Animals;
 
 namespace ZooConsole.Commands
 {
