@@ -18,54 +18,26 @@ namespace ZooSim
             Account = new Account(1000.00m);
         }
 
-        public void Add(IAnimal animal)
-        {
-            Animals.Add(animal);
-        }
+        public void Add(IAnimal animal) => Animals.Add(animal);
 
-        public void AddFunds(decimal amount)
-        {
-            Account.AddFunds(amount);
-        }
+        public void AddFunds(decimal amount) => Account.AddFunds(amount);
 
-        public void AddLoan(decimal amount)
-        {
-            Account.AddLoan(amount);
-        }
+        public void AddLoan(decimal amount) => Account.AddLoan(amount);
 
-        public List<IAnimal> GetAnimals()
-        {
-            return Animals.GetAnimals();
-        }
+        public bool CanRemoveFunds(decimal amount) => Account.CanRemoveFunds(amount);
 
-        public decimal GetBalance()
-        {
-            return Account.GetBalance();
-        }
+        public List<IAnimal> GetAnimals() => Animals.GetAnimals();
 
-        public decimal GetLoan()
-        {
-            return Account.GetLoan();
-        }
+        public decimal GetBalance() => Account.GetBalance();
 
-        public void PayLoan(decimal amount)
-        {
-            Account.PayLoan(amount);
-        }
+        public decimal GetLoan() => Account.GetLoan();
 
-        public void Remove(IAnimal animal)
-        {
-            Animals.Remove(animal);
-        }
+        public void PayLoan(decimal amount) => Account.PayLoan(amount);
 
-        public void RemoveFunds(decimal amount)
-        {
-            Account.RemoveFunds(amount);
-        }
+        public void Remove(IAnimal animal) => Animals.Remove(animal);
 
-        public void WithdrawInterest(DateTime gameTime)
-        {
-            Account.WithdrawInterest(gameTime);
-        }
+        public void RemoveFunds(decimal amount) => Account.RemoveFunds(amount);
+
+        public void WithdrawInterest(DateTime gameTime) => Account.WithdrawInterest(gameTime);
     }
 }

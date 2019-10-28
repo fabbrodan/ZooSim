@@ -48,6 +48,11 @@ namespace ZooSim.Financial
             }
         }
 
+        public bool CanRemoveFunds(decimal amount)
+        {
+            return _balance - amount >= 0;
+        }
+
         public void WithdrawInterest(DateTime gameTime)
         {
             if (gameTime >= _nextInterestTime)

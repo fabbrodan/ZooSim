@@ -22,8 +22,11 @@ namespace ZooConsole.Commands
         public void Execute()
         {
             IAnimal animal = (T)Activator.CreateInstance(typeof(T), new object[] { _name, _age });
-            _animals.Add(animal);
-            _account.RemoveFunds(animal.GetPrice());
+            if (_account.CanRemoveFunds(animal.GetPrice()))
+            {
+                _account.RemoveFunds(animal.GetPrice());
+                _animals.Add(animal);
+            }
         }
     }
 }
