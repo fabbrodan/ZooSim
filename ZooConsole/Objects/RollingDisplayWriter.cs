@@ -18,15 +18,9 @@ namespace ZooConsole.Objects
             _width = display.Width;
         }
 
-        public int GetHeight()
-        {
-            return _height;
-        }
+        public int GetHeight() => _height;
 
-        public int GetWidth()
-        {
-            return _width;
-        }
+        public int GetWidth() => _width;
 
         public void Log(string message)
         {

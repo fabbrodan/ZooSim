@@ -9,7 +9,6 @@ namespace ZooSim.Interfaces
         void Update(DateTime gameTime);
         string GetState();
         string GetName();
-
         decimal GetPrice();
     }
 }

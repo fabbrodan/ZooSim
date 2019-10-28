@@ -5,46 +5,46 @@ namespace ZooSim.Financial
 {
     public class Account : IZooAccount
     {
-        public decimal Balance;
-        public decimal Loan;
+        private decimal _balance;
+        private decimal _loan;
         private static readonly decimal _interest = 0.15m;
         private DateTime _nextInterestTime = DateTime.Now.AddMinutes(5);
 
         public Account(decimal balance)
         {
-            Balance = balance;
-            Loan = 0.00m;
+            _balance = balance;
+            _loan = 0.00m;
         }
 
         public void AddFunds(decimal amount)
         {
-            Balance += amount;
+            _balance += amount;
         }
 
         public void AddLoan(decimal amount)
         {
             AddFunds(amount);
-            Loan += amount;
+            _loan += amount;
         }
 
-        public decimal GetBalance() => Balance;
+        public decimal GetBalance() => _balance;
 
-        public decimal GetLoan() => Loan;
+        public decimal GetLoan() => _loan;
 
         public void PayLoan(decimal amount)
         {
-            if (Balance - amount > 0 && Loan >= amount)
+            if (_balance - amount > 0 && _loan >= amount)
             {
                 RemoveFunds(amount);
-                Loan -= amount;
+                _loan -= amount;
             }
         }
 
         public void RemoveFunds(decimal amount)
         {
-            if (Balance - amount >= 0)
+            if (_balance - amount >= 0)
             {
-                Balance -= amount;
+                _balance -= amount;
             }
         }
 
@@ -53,7 +53,7 @@ namespace ZooSim.Financial
             if (gameTime >= _nextInterestTime)
             {
                 _nextInterestTime = _nextInterestTime.AddMinutes(5);
-                Balance -= Loan * _interest;
+                _balance -= _loan * _interest;
             }
         }
     }

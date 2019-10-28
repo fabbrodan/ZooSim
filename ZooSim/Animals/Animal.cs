@@ -12,7 +12,8 @@ namespace ZooSim.Animals
         protected int Age { get; set; }
         protected int HungerLevel { get; set; }
         protected int EnergyLevel { get; set; }
-        public decimal Price { get; set; }
+        protected decimal Price { get; set; }
+
         protected DateTime nextUpdateTime;
         protected DateTime nextAgingTime = DateTime.Now.AddHours(24);
         public Animal(string Name, int Age)
@@ -34,14 +35,8 @@ namespace ZooSim.Animals
         public abstract void Update(DateTime gameTime);
         public abstract string GetState();
 
-        public string GetName()
-        {
-            return Name;
-        }
+        public string GetName() => Name;
 
-        public decimal GetPrice()
-        {
-            return Price;
-        }
+        public decimal GetPrice() => Price;
     }
 }

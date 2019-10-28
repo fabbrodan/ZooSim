@@ -23,13 +23,7 @@ namespace ZooConsole.Objects
             _display.Value = message;
         }
 
-        public int GetHeight()
-        {
-            return _height;
-        }
-        public int GetWidth()
-        {
-            return _width;
-        }
+        public int GetHeight() => _height;
+        public int GetWidth() => _width;
     }
 }
