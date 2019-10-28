@@ -5,7 +5,8 @@ Utilizing [ConsoleSimulationEngine200](https://github.com/mattiasnordqvist/Conso
 
 Version: Alpha 0.0.1
 - [X] Interest of Loans
-- [ ]  Animals generating money
+- [ ] Animals generating money
+- [ ] Death by age
 
 ## ZooConsole
 
